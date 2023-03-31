@@ -1,0 +1,304 @@
+
+**************************************************************************************************************************************************************************************
+//JSON String
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JSON String</title>
+</head>
+<body>
+    <p>Access a JavaScript objects</p>
+    <span id="demo"></span>
+
+    <script> 
+        var obj={
+            "name":"Rudra",
+            "age":20,
+            "car":"limo"
+        };
+        var x=obj.car;
+        document.getElementById('demo').innerHTML= obj.name + ", "+x;
+    </script>
+</body>
+</html>
+
+
+
+
+**************************************************************************************************************************************************************************************
+//JSON nested object
+
+
+<html>
+<body>
+<script>
+   var person = {
+      "name":"Ram",
+      "age":27,
+      "vehicles": {
+         "car":"limousine",
+         "bike":"ktm-duke",
+         "plane":"lufthansa"
+      }
+   }
+   document.write("Mr Ram has a car called" + " " + person.vehicles.car);
+</script>
+</body>
+</html>
+
+
+
+
+
+**************************************************************************************************************************************************************************************
+//Temperature conversion with JSP
+
+
+<!-- client side -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JSP Temperature conversion</title>
+</head>
+<body>
+    <form action="temp.jsp" method="get">
+        <input type="text" name="temp"><br>
+        <input type="submit" value="submit">
+    </form>
+</body>
+</html>
+
+
+<!-- server side --> 
+==>temp.jsp
+
+
+<% @page import="java.util.Date" %>
+<% @page contentType="text/html" pageEncoding='uft-8' %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JSP Page</title>
+</head>
+<body>
+    <%
+        int Ctemp;
+        float Ftemp;
+
+        Ctemp = integet.parseInt(request.getParameter("temp"));
+        Ftemp = (9.0f / 5.0f) * (Ctemp + 32.0f);
+    %>
+    <b>Temperature in Farenhiet is <% =Ftemp %></b>
+</body>
+</html>
+
+
+
+
+**************************************************************************************************************************************************************************************
+//JSP Fibonacci series
+
+<!-- client side -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JSP Fibo series</title>
+</head>
+<body>
+    <h1>Fibonacci series generator</h1>
+    <form action="fibo.jsp" method="get">
+        <input type="text" name="temp"><br>
+        <input type="submit" value="find_fibo">
+    </form>
+</body>
+</html>
+
+<!-- server side -->
+==>fibo.jsp
+
+<% @page contentType="text/html" pageEncoding='uft-8' %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JSP Page</title>
+</head>
+<body>
+    <%
+        int n = integet.parseInt(request.getParameter("temp"));
+        int f0=0, f1=1;
+        int f2=0, i=1;
+        while(i<=n){
+    %>
+    <b><% =f0 %></b>
+    <% 
+        out.print('\t'); 
+        f2= f0 + f1;
+        f1=f2;
+        i++;
+        }
+    %>
+</body>
+</html>
+
+
+
+**************************************************************************************************************************************************************************************
+// JDBC UPDATE 
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package jdbcmysql;
+import java.sql.*;
+import java.awt.event.*;
+import java.awt.*;
+import javax.swing.*;
+import java.util.logging.*;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+//import javax.sql.*;
+
+/**
+ *
+ * @author hp
+ */
+public class updatingSql extends JFrame implements ActionListener {
+    JButton bt;
+    JTextField t1,t2,t3,t4;
+    JFrame jf;
+    JLabel l1,l2,l3,l4;
+    
+    public updatingSql(){
+        jf=new JFrame("Frame for updating table");
+        jf.setVisible(true);
+        jf.setBounds(600,100,700,500);
+        jf.setLayout(new FlowLayout());
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        l1=new JLabel("ID: ");
+        jf.add(l1);
+        t1=new JTextField(10);
+        jf.add(t1);
+        
+        l2=new JLabel("Fname: ");
+        jf.add(l2);
+        t2=new JTextField(10);
+        jf.add(t2);
+        
+        l3=new JLabel("Lname: ");
+        jf.add(l3);
+        t3=new JTextField(10);
+        jf.add(t3);
+        
+        l4=new JLabel("dept: ");
+        jf.add(l4);
+        t4=new JTextField(10);
+        jf.add(t4);
+        
+        bt=new JButton("update");
+        bt.addActionListener(this);
+        jf.add(bt);
+    }   
+    public static void main(String draj[]){
+        new updatingSql();
+    }    
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==bt){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url="jdbc:mysql://localhost:3306/drajdb";
+            Connection conn=DriverManager.getConnection(url,"root","dR@J473#J!");
+            
+//            Statement stm=conn.createStatement();
+            String sql="UPDATE data set id=?, fname=?, lname=?, dept=? where id=3";
+            PreparedStatement pstm=conn.prepareStatement(sql);
+            pstm.setString(1, t1.getText());
+            pstm.setString(2, t2.getText());
+            pstm.setString(3, t3.getText());
+            pstm.setString(4, t4.getText());
+            pstm.executeUpdate();     
+            
+            System.out.println("updating is done for id="+t1.getText());
+        } catch(SQLException se){
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(updatingSql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    }
+}
+
+
+
+
+
+
+
+**************************************************************************************************************************************************************************************
+//JDBC DELETE 
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package jdbcmysql;
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+import java.sql.*;
+//import java.util.*;
+/**
+ *
+ * @author hp
+ */
+public class deletingSql extends JFrame implements ActionListener {
+    public static void main(String draj[]){
+    new deletingSql();
+    }
+    JFrame jf;
+    JLabel jl,message;
+    JTextField jtf;
+    JButton jb;
+    public deletingSql(){
+    jf=new JFrame("frame for record Deleting");
+    jf.setBounds(600,200,400,200);
+    jf.setVisible(true);
+    jf.setLayout(new FlowLayout());
+    jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    
+    jl=new JLabel("Delete record for ID:");
+    jf.add(jl);
+    jtf=new JTextField(4);
+    jf.add(jtf);
+    jb=new JButton("delete");
+    jf.add(jb);
+    jb.addActionListener(this);
+    
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent as){
+        if (as.getSource()==jb){
+         try{
+             Class.forName("com.mysql.cj.jdbc.Driver");
+             String url="jdbc:mysql://localhost:3306/drajdb";
+             Connection con=DriverManager.getConnection(url,"root","dR@J473#J!");
+             
+             String sql="DELETE FROM actors WHERE id=?";
+             PreparedStatement pstm=con.prepareStatement(sql);
+             
+             pstm.setString(1, jtf.getText());
+             pstm.executeUpdate();
+             
+             System.out.println("record is deleted for id="+jtf.getText());
+             pstm.close();
+             con.close();
+         }catch(SQLException se){
+            System.out.println(se.getMessage());
+         } catch(ClassNotFoundException cf){}         
+        }       
+    }
+}

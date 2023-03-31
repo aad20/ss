@@ -1,0 +1,162 @@
+//check if a number ia prime with exception
+
+import java.util.Scanner;
+public class isPrimeNumber {
+    public static void main(String[] Draj) {
+        int n,a=0;
+        System.out.print("Enter a number:");
+        Scanner sc = new Scanner(System.in);
+            try {
+                n=sc.nextInt();
+                if(n<0){
+                    System.out.println(n+" is a negative number.so we cant decide.");
+                }
+                for (int i=2; i<n; i++){
+                    if(n%i==0)
+                    {a++;}
+                }if(a==0){
+                    System.out.println(n+" is a prime number.");
+                }else{
+                    System.out.println(n+" is not a prime number.");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+                System.out.println("Please enter only integer values");
+            }
+    }    
+}
+
+........................................................................................................................................................................................
+//arithmetic operation
+
+import java.util.Scanner;
+public class arithmetic {
+    public static void main(String[] args) {
+        int a,b;
+        Scanner sc = new Scanner(System.in);
+        try {
+            System.out.print("Enter 1st number:");
+            a=sc.nextInt();
+            System.out.print("Enter 2nd number:");
+            b=sc.nextInt();
+
+            System.out.println("Addition of "+a+" and "+b+" ="+(a+b));
+            System.out.println("Subtraction of "+a+" and "+b+" ="+(a-b));
+            System.out.println("multiplication of "+a+" and "+b+" ="+(a*b));
+            System.out.println("Division of "+a+" by "+b+" ="+(a/b));
+
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("Please enter only integer values");
+        }
+    }    
+}
+
+
+........................................................................................................................................................................................
+//factorial 
+
+import java.util.Scanner;
+public class facto {
+    public static void main(String[] Draj) {
+        int n,f=1;
+        Scanner sc = new Scanner(System.in);
+        try {
+            System.out.print("Enter a number to find factorial:");
+            n=sc.nextInt();
+            for(int i=1; i<=n; i++){
+                f=f*i;
+            }
+            System.out.print("Factorial of "+n+" ="+f);
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("Please enter only integer values");
+        }
+    }    
+}
+
+
+
+
+........................................................................................................................................................................................
+//Rectangle area constructor
+
+import java.util.Scanner;
+public class area_constructor {
+    int len,width;
+    Scanner sc=new Scanner(System.in);
+    area_constructor(){
+        System.out.print("Enter length of the rectangle: ");
+        len=sc.nextInt();
+        
+        System.out.print("Enter width of the rectangle: ");
+        width=sc.nextInt();
+    }
+    public static void main(String[] args) {
+        calculate_Area ca=new calculate_Area();
+        ca.result();
+    }
+}
+class calculate_Area extends area_constructor{
+    void result() {
+        int area= len* width;
+        System.out.println("The area of rectangle = "+area);
+    }
+}
+
+
+
+.................................................................................
+// MULTIPE INTERFACE FROM 2 class
+
+import java.util.Scanner;
+interface logic{
+    void relational();
+}
+interface math{
+    void arithmatic();
+}
+public class multiple_interface implements logic, math {
+    int a,b;
+    Scanner scr=new Scanner(System.in);
+    void get(){
+        System.out.println("Enter first number:");
+        a=scr.nextInt();
+        System.out.println("Enter second number:");
+        b=scr.nextInt();
+    }
+    @Override
+    public void arithmatic() {
+        System.out.println("Addition of "+a+" and "+b+" ="+(a+b));
+        System.out.println("multiplication of "+a+" and "+b+" ="+(a*b));
+        System.out.println("Subtraction of "+a+" and "+b+" ="+(a-b));
+        if(b!=0){
+            System.out.println("Division of "+a+" by "+b+" ="+(a/b));
+        }else{
+            System.out.println("\n\nCon't divide by 0.\nsecond number is:"+b);
+        }
+    }
+    
+    @Override
+    public void relational() {
+        if (a > b){
+            System.out.println(a+" is greater than "+b);
+        }else if(a>=b){
+            System.out.println(a+" is greater than or equal to "+b);
+        }else if(a<b){
+            System.out.println(a+" is smaller than "+b);
+        }else if(a<=b){
+            System.out.println(a+" is smaller than or equal to "+b);
+        }else if(a==b){
+            System.out.println(a+" is equal to "+b);
+        }else if(a!=b){
+            System.out.println(a+" is not equal to "+b);
+        }
+    }
+    public static void main(String draj[]) {
+        multiple_interface mi=new multiple_interface();
+        mi.get();
+        mi.arithmatic();
+        mi.relational();
+    }
+}
